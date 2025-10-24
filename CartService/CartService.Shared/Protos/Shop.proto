@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "CartService.Shared.Protos.GrpcShopService";
+package shop;
+
+service ShopService {
+  rpc GetShopById(GetShopByIdRequest) returns (GetShopByIdResponse);
+}
+
+message GetShopByIdRequest {
+  string shop_id = 1;
+}
+
+message GetShopByIdResponse {
+  string name = 3;
+}
