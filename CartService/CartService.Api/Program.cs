@@ -27,6 +27,21 @@ builder.Services.AddGrpcClient<ShopService.ShopServiceClient>(options =>
     options.Address = new Uri(builder.Configuration["gRPC:ShopService"]); 
 });
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    
+    options.Listen(IPAddress.Any, 5004, listenOptions =>
+    {
+        listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2;
+    });
+    
+
+    options.Listen(IPAddress.Any, 5005, listenOptions =>
+    {
+        listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2; 
+    });
+}); 
+
 
 //Jwt
 builder.Services.AddAuthentication(options =>
@@ -172,6 +187,8 @@ app.UseHttpsRedirection();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapGrpcService<CartService.Shared.Protos.GrpcCartService.CartService.CartServiceBase>();
 app.MapControllers();
 
 app.Run();
