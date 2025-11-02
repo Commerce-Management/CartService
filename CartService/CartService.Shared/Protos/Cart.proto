@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "CartService.Shared.Protos.GrpcCartService";
+package order;
+
+service CartService {
+  rpc GetCartByUserId (GetCartByUserIdRequest) returns (GetCartByUserIdResponse);
+}
+
+message GetCartByUserIdRequest {
+  string user_id = 1;
+}
+
+message CartProduct {
+  string user_id = 1;
+  string product_id = 2;
+}
+
+message GetCartByUserIdResponse {
+  repeated CartProduct items = 1;
+}
