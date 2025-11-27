@@ -12,7 +12,6 @@ message GetCartByUserIdRequest {
 }
 
 message CartProduct {
-  string user_id = 1;
   string product_id = 2;
 }
 
