@@ -43,7 +43,6 @@ public class GrpcCartService : CartService.Shared.Protos.GrpcCartService.CartSer
             {
                 resp.Items.Add(new CartProduct
                 {
-                    UserId = request.UserId,
                     ProductId = item.ProductId
                 });
             }
